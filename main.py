@@ -1,4 +1,7 @@
 from sklearn import linear_model
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
+
 
 feature_names = [
     "Age",
@@ -305,7 +308,8 @@ if len(data) != len(percentages):
     print("Bad dataset")
     quit()
 
-reg = linear_model.LinearRegression()
+degree = 9
+reg = make_pipeline(PolynomialFeatures(degree), linear_model.LinearRegression())
 reg.fit(data, percentages)
 
 age = int(input("Enter Age: "))
@@ -362,9 +366,7 @@ test = [
 
 predictions = reg.predict(test)
 
-if predictions[0] < 0:
-    predictions[0] = 0.0
-elif predictions[0] > 1:
-    predictions[0] = 1.0
+if predictions[0] < 0 or predictions[0] > 1:
+    predictions[0].round()
 
 print("Survive probability:", predictions)
