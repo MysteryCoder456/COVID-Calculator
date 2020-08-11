@@ -308,7 +308,7 @@ if len(data) != len(percentages):
     print("Bad dataset")
     quit()
 
-degree = 9
+degree = 3
 reg = make_pipeline(PolynomialFeatures(degree), linear_model.LinearRegression())
 reg.fit(data, percentages)
 
@@ -365,11 +365,4 @@ test = [
 ]
 
 predictions = reg.predict(test)
-rounded_preds = []
-
-# ensure the predictions are between 0 and 1
-for prediction in predictions:
-    if prediction < 0 or prediction > 1:
-        rounded_preds.append(round(prediction))
-
-print("Survive probability:", rounded_preds)
+print("Survive probability:", predictions)
