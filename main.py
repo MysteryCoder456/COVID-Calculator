@@ -365,8 +365,11 @@ test = [
 ]
 
 predictions = reg.predict(test)
+rounded_preds = []
 
-if predictions[0] < 0 or predictions[0] > 1:
-    predictions[0].round()
+# ensure the predictions are between 0 and 1
+for prediction in predictions:
+    if prediction < 0 or prediction > 1:
+        rounded_preds.append(round(prediction))
 
-print("Survive probability:", predictions)
+print("Survive probability:", rounded_preds)
