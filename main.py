@@ -1,4 +1,3 @@
-import sklearn
 from sklearn import linear_model
 
 feature_names = [
@@ -285,15 +284,55 @@ percentages = [
 reg = linear_model.LinearRegression()
 reg.fit(data, percentages)
 
+age = int(input("Enter Age: "))
+gender = input("Enter Gender (m/f): ")
+
+heart = input("Do you have heart disease (y/n): ").lower()
+diab = input("Do you have diabetes (y/n): ").lower()
+chron = input("Do you have Chronic Respiratory Disease (y/n): ").lower()
+hyper = input("Do you have Hypertension (y/n): ").lower()
+cancer = input("Do you have cancer (y/n): ").lower()
+
+if gender == "m":
+    gender = 0
+elif gender == "f":
+    gender = 1
+
+if heart == "y":
+    heart = 1
+elif heart == "n":
+    heart = 0
+
+if diab == "y":
+    diab = 1
+elif diab == "n":
+    diab = 0
+
+if chron == "y":
+    chron = 1
+elif chron == "n":
+    chron = 0
+
+if hyper == "y":
+    hyper = 1
+elif hyper == "n":
+    hyper = 0
+
+if cancer == "y":
+    cancer = 1
+elif cancer == "n":
+    cancer = 0
+
+
 test = [
     [
-        48,  # Age
-        0,  # Gender
-        0,  # Heart Disease
-        0,  # Diabetes
-        0,  # Chronic Respitory Disease
-        1,  # Hypertension
-        0,  # Cancer
+        age,  # Age
+        gender,  # Gender
+        heart,  # Heart Disease
+        diab,  # Diabetes
+        chron,  # Chronic Respitory Disease
+        hyper,  # Hypertension
+        cancer  # Cancer
     ],
 ]
 
