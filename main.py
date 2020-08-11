@@ -249,6 +249,24 @@ data = [
         1,  # Hypertension
         1,  # Cancer
     ],
+    [
+        14,  # Age
+        0,  # Gender
+        0,  # Heart Disease
+        0,  # Diabetes
+        0,  # Chronic Respitory Disease
+        0,  # Hypertension
+        0,  # Cancer
+    ],
+    [
+        13,  # Age
+        0,  # Gender
+        0,  # Heart Disease
+        0,  # Diabetes
+        0,  # Chronic Respitory Disease
+        0,  # Hypertension
+        0,  # Cancer
+    ],
 ]
 
 # probability for not being infected
@@ -278,8 +296,14 @@ percentages = [
     0.8831,
     0.8571,
     0.8324,
-    0.8093
+    0.8093,
+    1.0000,
+    1.0000,
 ]
+
+if len(data) != len(percentages):
+    print("Bad dataset")
+    quit()
 
 reg = linear_model.LinearRegression()
 reg.fit(data, percentages)
@@ -337,4 +361,10 @@ test = [
 ]
 
 predictions = reg.predict(test)
+
+if predictions[0] < 0:
+    predictions[0] = 0.0
+elif predictions[0] > 1:
+    predictions[0] = 1.0
+
 print("Survive probability:", predictions)
